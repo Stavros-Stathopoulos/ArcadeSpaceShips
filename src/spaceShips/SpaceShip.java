@@ -3,12 +3,10 @@ package spaceShips;
 import java.awt.Color;
 import java.util.LinkedList;
 import javax.swing.ImageIcon;
-
-import gameSounds.GameAudioPlayer;
-import gameSounds.LaserSound;
-import gameSounds.SelectionSound;
-import mainPacket.MainClass;
+import gameSounds.*;
+import mainPacket.*;
 import spaceShips_LaserGuns.*;
+
 
 // SpaceShip class implementing the Navigation interface
 public class SpaceShip implements Navigation {
@@ -49,7 +47,8 @@ public class SpaceShip implements Navigation {
         if (this.name.equals("ENEMY")) {
             this.xCoord = enemy_s_x;
             this.yCoord = enemy_s_y;
-        } else {
+        }
+        else {
             this.xCoord = starting_x;
             this.yCoord = starting_y;
         }
@@ -59,43 +58,36 @@ public class SpaceShip implements Navigation {
     public int getSpeed() {
         return speed;
     }
-
+    public int get_shipWidth() {
+        return shipWidth;
+    }
     public final int get_cosmosHeight() {
         return cosmosHeight;
     }
-
     public Color getLaserColor() {
         return laserColor;
     }
-
     public String getName() {
         return name;
     }
-
     public ImageIcon getImage() {
         return image;
     }
-
     public final int get_cosmosWidth() {
         return cosmosWidth;
     }
-
     public final int get_shipHeight() {
         return shipHeight;
     }
-
     public final int get_XCoord() {
         return xCoord;
     }
-
     public final void set_XCoord(int step) {
         this.xCoord = step;
     }
-
     public final int get_YCoord() {
         return yCoord;
     }
-
     public final void set_YCoord(int step) {
         this.yCoord = step;
     }
@@ -125,7 +117,6 @@ public class SpaceShip implements Navigation {
         }
         return this.yCoord;
     }
-
     //This method moves the spaceship Down, if not possible returns message Invalid Movement
     //Also it does not move the spaceship if not possible
     @Override
@@ -139,7 +130,6 @@ public class SpaceShip implements Navigation {
         }
         return this.yCoord;
     }
-
     //This method moves the spaceship Left, if not possible returns message Invalid Movement
     //Also it does not move the spaceship if not possible
     @Override
@@ -153,7 +143,6 @@ public class SpaceShip implements Navigation {
         }
         return this.xCoord;
     }
-
     //This method moves the spaceship Right, if not possible returns message Invalid Movement
     //Also it does not move the spaceship if not possible
     @Override
@@ -171,19 +160,34 @@ public class SpaceShip implements Navigation {
     // Method to fire lasers and add them to the list
     public final void fireLaser() {
         laserShootersLinkedList.add(laserShootersLinkedList.size(), new Laser(this.xCoord, this.yCoord, this.power));
-        //printCoords();
         @SuppressWarnings("unused")
         LaserSound audioPlayer = new LaserSound();
     }
-
     // Method to print current coordinates
     public void printCoords() {
         System.out.println(this + ": X: " + this.xCoord + " Y: " + this.yCoord);
         System.out.println("_______________________________");
     }
 
-    public boolean checkIfHit(){
-        
-        return false;
+    public boolean checkIfHit(SpaceShip enemy) {
+        boolean[] hit = {false};
+        int width = this.get_shipWidth();
+
+        this.laserShootersLinkedList.forEach(tmp -> {
+            if (tmp.y > this.get_cosmosHeight()) {
+                // Laser is out of bounds, remove it or handle as needed
+                return;
+            }
+            // Check if the laser's coordinates overlap with the spaceship's coordinates
+            if (tmp.x >= enemy.get_XCoord() && tmp.x <= (enemy.get_XCoord() + enemy.get_shipWidth())
+                    && tmp.y >= enemy.get_YCoord() && tmp.y <= (enemy.get_YCoord() + enemy.get_shipHeight())) {
+                System.out.println(tmp + "\t\t\tinside");
+                hit[0] = true;
+            } else {
+                System.out.println(tmp + "\toutside");
+            }
+            tmp.y = tmp.y + 15;
+        });
+        return hit[0];
     }
 }

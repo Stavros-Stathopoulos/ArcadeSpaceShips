@@ -1,6 +1,6 @@
 package mainPacket;
 
-import gui.SpaceFrame;
+import gui.*;
 
 // MainGUI class for initializing and launching the space shooting game
 public class MainGUI {

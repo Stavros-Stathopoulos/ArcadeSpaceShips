@@ -24,7 +24,7 @@ public class GamePlayScreen extends JPanel implements KeyListener {
     private static final long serialVersionUID = 1L;
 
     private SpaceShip userSpaceShip;
-    private SpaceShipENEMY enemy = new SpaceShipENEMY();
+    private final SpaceShipENEMY enemy = new SpaceShipENEMY();
 
     // Constructor for GamePlayScreen
     GamePlayScreen() {
@@ -39,7 +39,7 @@ public class GamePlayScreen extends JPanel implements KeyListener {
     private void createDaemon() {
         Timer timer = new Timer();
         TimerTask task = new MonitorDaemonGame();
-        timer.schedule(task, 100, 100);
+        timer.schedule(task, 200, 200);
     }
 
     // Inner class for the monitoring daemon
@@ -81,6 +81,18 @@ public class GamePlayScreen extends JPanel implements KeyListener {
         // Show laser shootings for both player and enemy
         showLaserShootings(g, enemy);
         showLaserShootings(g, userSpaceShip);
+
+        userSpaceShip.checkIfHit(enemy);
+        enemy.checkIfHit(userSpaceShip);
+
+        /*if(userSpaceShip.checkIfHit(enemy) == true ){
+            System.out.println(userSpaceShip.checkIfHit(enemy) + "user hit");
+
+            //SpaceFrame.cardLayout.next(SpaceFrame.gamePlayScreen.getParent());
+        }else if(enemy.checkIfHit(userSpaceShip) == true){
+            System.out.println(enemy.checkIfHit(userSpaceShip)+ "enemy hit");
+            //SpaceFrame.cardLayout.next(SpaceFrame.gamePlayScreen.getParent());
+        }*/
     }
 
     // Method to handle key pressed events
@@ -128,9 +140,11 @@ public class GamePlayScreen extends JPanel implements KeyListener {
             g.setColor(s.getLaserColor());
             if (!Objects.equals(s.getName(), "ENEMY")) {
                 g.drawLine(tmp.x, tmp.y, tmp.x, tmp.y - 15);
+
                 tmp.y = tmp.y - 15;
             } else {
                 g.drawLine(tmp.x, tmp.y, tmp.x, tmp.y + 15);
+
                 tmp.y = tmp.y + 15;
             }
         });
