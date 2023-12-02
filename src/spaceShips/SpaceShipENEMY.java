@@ -16,7 +16,7 @@ public class SpaceShipENEMY extends SpaceShip {
     // Constructor for SpaceShipENEMY
     public SpaceShipENEMY() {
         // Call the constructor of the base class (SpaceShip) with specific parameters
-        super("ENEMY", 15, 1, icon, Color.CYAN);
+        super("ENEMY", 15, 3, icon, Color.CYAN);
     }
 
     // Method for randomizing enemy movements

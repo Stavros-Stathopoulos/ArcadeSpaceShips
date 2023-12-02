@@ -12,6 +12,6 @@ public class SpaceShipDELTA extends SpaceShip {
     // Constructor for SpaceShipDELTA
     public SpaceShipDELTA() {
         // Call the constructor of the base class (SpaceShip) with specific parameters
-        super("DELTA", 40, 1, icon, Color.MAGENTA);
+        super("DELTA", 40, 5, icon, Color.MAGENTA);
     }
 }

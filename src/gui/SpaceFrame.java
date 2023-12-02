@@ -1,11 +1,11 @@
 package gui;
 
-import java.awt.CardLayout;
+import java.awt.*;
 import java.io.Serial;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
+
 import gameSounds.GameAudioPlayer;
+import mainPacket.MainGUI;
 
 // SpaceFrame class representing the main JFrame for the space shooting game
 public class SpaceFrame extends JFrame {
@@ -17,6 +17,8 @@ public class SpaceFrame extends JFrame {
     static int width, height;
     static SelectSpaceShipScreen selectSpaceShipScreen = new SelectSpaceShipScreen();
     static GamePlayScreen gamePlayScreen = new GamePlayScreen();
+    static GameOverScreenUser GameOverScreenUser = new GameOverScreenUser();
+    static GameOverScreenEnemy GameOverScreenEnemy = new GameOverScreenEnemy();
     static CardLayout cardLayout = new CardLayout();
     static JPanel spaceFramePanel = new JPanel();
 
@@ -46,7 +48,25 @@ public class SpaceFrame extends JFrame {
         spaceFramePanel.setLayout(cardLayout);
         spaceFramePanel.add(selectSpaceShipScreen, "Selection screen");
         spaceFramePanel.add(gamePlayScreen, "GamePlay screen");
+        spaceFramePanel.add(GameOverScreenUser, "Game Over screen");
+        spaceFramePanel.add(GameOverScreenEnemy, "Game Over screen");
 
         this.add(spaceFramePanel);
+    }
+
+    static public JButton getButton() {
+        JButton button = new JButton("Play Again");
+        button.setFont(new Font("Arcade Classic", Font.ITALIC, 15));
+        button.setForeground(Color.WHITE);
+        button.setBackground(Color.BLACK);
+        button.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        return button;
+    }
+
+    static public  JLabel getText(String str){
+        JLabel text = new JLabel(str, JLabel.CENTER);
+        text.setFont(new Font("Arcade Classic", Font.ITALIC, 15));
+        text.setForeground(Color.WHITE);
+        return text;
     }
 }

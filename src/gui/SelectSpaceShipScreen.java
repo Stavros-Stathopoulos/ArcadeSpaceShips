@@ -196,7 +196,7 @@ public class SelectSpaceShipScreen extends JPanel {
         southPanel.removeAll();
         @SuppressWarnings("unused")
         SelectionSound AudioPlayer = new SelectionSound();
-        JLabel labelSpeed = new JLabel("Speed:" + ship.getSpeed() + " mach/min", JLabel.CENTER);
+        JLabel labelSpeed = new JLabel("Speed:" + ship.getSpeed() + " KM/Sec", JLabel.CENTER);
         labelSpeed.setFont(new Font("Arcade Classic", Font.ITALIC, 15));
         labelSpeed.setForeground(Color.WHITE);
         southPanel.add(labelSpeed);
