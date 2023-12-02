@@ -13,7 +13,7 @@ public class SpaceShipALPHA extends SpaceShip{
     public SpaceShipALPHA () {
 
         // Call the constructor of the base class (SpaceShip) with specific parameters
-        super("ALPHA", 10, 1,icon, Color.MAGENTA );
+        super("ALPHA", 10, 2,icon, Color.MAGENTA );
 
     }
 

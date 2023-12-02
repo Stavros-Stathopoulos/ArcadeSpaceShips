@@ -23,6 +23,7 @@ public class SpaceShip implements Navigation {
     private static final int cosmosWidth = MainClass.cosmosWidth;
     private static final int shipWidth = MainClass.spaceShipWidth;
     private static final int shipHeight = MainClass.spaceShipHeight;
+    private static  int lifes = 100;
 
     // Initial coordinates for player and enemy spaceships
     protected int xCoord;
@@ -57,6 +58,15 @@ public class SpaceShip implements Navigation {
     // Getter and Setter methods for various properties
     public int getSpeed() {
         return speed;
+    }
+    public static int getLifes() {
+        return lifes;
+    }
+    public static void setLifes(int lifes) {
+        SpaceShip.lifes = lifes;
+    }
+    public int getPower() {
+        return power;
     }
     public int get_shipWidth() {
         return shipWidth;
@@ -178,16 +188,30 @@ public class SpaceShip implements Navigation {
                 // Laser is out of bounds, remove it or handle as needed
                 return;
             }
-            // Check if the laser's coordinates overlap with the spaceship's coordinates
-            if (tmp.x >= enemy.get_XCoord() && tmp.x <= (enemy.get_XCoord() + enemy.get_shipWidth())
-                    && tmp.y >= enemy.get_YCoord() && tmp.y <= (enemy.get_YCoord() + enemy.get_shipHeight())) {
-                System.out.println(tmp + "\t\t\tinside");
-                hit[0] = true;
+            if (this.getName().equals("ENEMY")) {
+                // Check if the laser's coordinates overlap with the spaceship's coordinates
+                if (tmp.x >= enemy.get_XCoord() && tmp.x <= (enemy.get_XCoord() + enemy.get_shipWidth())
+                        && tmp.y >= enemy.get_YCoord() && tmp.y <= (enemy.get_YCoord() + enemy.get_shipHeight())) {
+                    //System.out.println(tmp + "\t\t\tinside");
+                    hit[0] = true;
+                } else {
+                    //System.out.println(tmp + "\toutside");
+                }
+                tmp.y = tmp.y + 15;
             } else {
-                System.out.println(tmp + "\toutside");
+                // Check if the laser's coordinates overlap with the spaceship's coordinates
+                if (tmp.x >= enemy.get_XCoord() && tmp.x <= (enemy.get_XCoord() + enemy.get_shipWidth())
+                        && tmp.y >= enemy.get_YCoord() && tmp.y <= (enemy.get_YCoord() + enemy.get_shipHeight())) {
+                    //System.out.println(tmp + "\t\t\tinside");
+                    hit[0] = true;
+                } else {
+                    //System.out.println(tmp + "\toutside");
+                }
+                tmp.y = tmp.y - 15;
             }
-            tmp.y = tmp.y + 15;
+
         });
+
         return hit[0];
     }
 }

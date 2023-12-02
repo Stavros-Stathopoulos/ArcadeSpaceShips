@@ -82,17 +82,26 @@ public class GamePlayScreen extends JPanel implements KeyListener {
         showLaserShootings(g, enemy);
         showLaserShootings(g, userSpaceShip);
 
-        userSpaceShip.checkIfHit(enemy);
-        enemy.checkIfHit(userSpaceShip);
 
-        /*if(userSpaceShip.checkIfHit(enemy) == true ){
-            System.out.println(userSpaceShip.checkIfHit(enemy) + "user hit");
 
-            //SpaceFrame.cardLayout.next(SpaceFrame.gamePlayScreen.getParent());
-        }else if(enemy.checkIfHit(userSpaceShip) == true){
-            System.out.println(enemy.checkIfHit(userSpaceShip)+ "enemy hit");
-            //SpaceFrame.cardLayout.next(SpaceFrame.gamePlayScreen.getParent());
-        }*/
+
+        if(userSpaceShip.checkIfHit(enemy)){
+            //System.out.println("User hit enemy");
+            enemy.setLifes(enemy.getPower()-userSpaceShip.getPower());
+        }
+        else if (enemy.checkIfHit(userSpaceShip)){
+            //System.out.println("Enemy hit user");
+            userSpaceShip.setLifes(userSpaceShip.getLifes()-enemy.getPower());
+        }
+        if(enemy.getLifes()<=0){
+            System.out.println("Enemy died User Won!");
+            SpaceFrame.cardLayout.next(SpaceFrame.spaceFramePanel);
+
+        }else if (userSpaceShip.getLifes()<=0){
+            System.out.println("User died Enemy Won!");
+            SpaceFrame.cardLayout.last(SpaceFrame.spaceFramePanel);
+        }
+
     }
 
     // Method to handle key pressed events
@@ -113,7 +122,7 @@ public class GamePlayScreen extends JPanel implements KeyListener {
         }
         if (e.getKeyCode() == KeyEvent.VK_B) {
             // Switch to the next card in the card layout
-            SpaceFrame.cardLayout.next(SpaceFrame.gamePlayScreen.getParent());
+            SpaceFrame.cardLayout.first(SpaceFrame.spaceFramePanel);
         }
         if (e.getKeyCode() == KeyEvent.VK_SPACE) {
             // Fire a laser from the user's  spaceship
@@ -138,14 +147,13 @@ public class GamePlayScreen extends JPanel implements KeyListener {
     private void showLaserShootings(Graphics g, SpaceShip s) {
         s.laserShootersLinkedList.forEach((tmp) -> {
             g.setColor(s.getLaserColor());
-            if (!Objects.equals(s.getName(), "ENEMY")) {
-                g.drawLine(tmp.x, tmp.y, tmp.x, tmp.y - 15);
-
-                tmp.y = tmp.y - 15;
-            } else {
+            if (s.getName().equals("ENEMY")) {
                 g.drawLine(tmp.x, tmp.y, tmp.x, tmp.y + 15);
-
                 tmp.y = tmp.y + 15;
+            }
+            else {
+                g.drawLine(tmp.x, tmp.y, tmp.x, tmp.y - 15);
+                tmp.y = tmp.y - 15;
             }
         });
     }

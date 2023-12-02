@@ -10,7 +10,7 @@ public class SpaceShipGAMA extends SpaceShip{
     static ImageIcon  icon = new ImageIcon("./Resources/images/GAMA.png");
 
     public SpaceShipGAMA () {
-        super("GAMA", 30, 1,icon, Color.MAGENTA );
+        super("GAMA", 30, 4,icon, Color.MAGENTA );
 
     }
 

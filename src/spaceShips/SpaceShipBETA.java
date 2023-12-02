@@ -12,6 +12,6 @@ public class SpaceShipBETA extends SpaceShip {
     // Constructor for SpaceShipBETA
     public SpaceShipBETA() {
         // Call the constructor of the base class (SpaceShip) with specific parameters
-        super("BETA", 20, 1, icon, Color.MAGENTA);
+        super("BETA", 20, 3, icon, Color.MAGENTA);
     }
 }
