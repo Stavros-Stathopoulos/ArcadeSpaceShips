@@ -16,6 +16,14 @@
 ## Introduction <a name="introduction"></a>
 
   This game is built in Java and provides a basic gameplay experience where you can control different types of spaceships and engage in shooting battles.
+  It contains tree screens, 
+
+  - the selection screen ![image](https://github.com/Stavros-Stathopoulos/ArcadeSpaceShips/assets/38631315/e6ec4e40-2d46-4c81-8f20-7f8812c6eb81)
+  - the main game screen ![image](https://github.com/Stavros-Stathopoulos/ArcadeSpaceShips/assets/38631315/702dfffc-84a8-4bf4-b64b-ed7b8808fa2a)
+  - the result screen ![image](https://github.com/Stavros-Stathopoulos/ArcadeSpaceShips/assets/38631315/0f4f0021-e0b6-4a26-b536-cb471c474701)
+
+
+
 
 ## Features <a name="features"></a>
 
